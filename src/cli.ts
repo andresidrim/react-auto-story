@@ -73,6 +73,10 @@ async function runCLI() {
       storyTitle: component.storyTitle,
       templatePath: TEMPLATE_PATH,
       storiesRoot,
+      generateDefault: component.generateDefault,
+      globalArgs: component.globalArgs,
+      variants: component.variants,
+      defaultArgs: component.defaultArgs,
     });
   }
 

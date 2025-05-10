@@ -5,15 +5,27 @@ export default {
     title: "<%= storyTitle %>",
     component: <%= componentName %>,
 
-    tags: ['autodocs'],
+    <% if (globalArgs) { %>
+        args: <%- globalArgs %>,
+    <% } %>
 
     decorators: (Story) => (
         <div className="w-full min-h-screen flex items-center justify-center">
             <Story />
         </div>
-    )
+    ),
+
+    tags: ['autodocs']
 } as Meta<typeof <%= componentName %>>;
 
 type Story = StoryObj<typeof <%= componentName %>>;
 
-export const Default: Story = {}
+<% if (generateDefault !== false) { %>
+export const Default: Story = {
+    <% if (defaultArgs) { %>args: <%- defaultArgs %><% } %>};
+<% } %>
+<% if (variants && variants.length > 0) {
+    variants.forEach((variant) => { %>
+export const <%= variant.name %>: Story = {
+    <% if (variant.args) { %>args: <%- variant.args %><% } %>};
+<% }) } %>

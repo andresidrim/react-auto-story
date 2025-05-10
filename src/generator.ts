@@ -1,6 +1,7 @@
 import ejs from "ejs";
 import fs from "fs-extra";
 import path from "path";
+import { StoryVariant } from "./common/types/storyVariant";
 
 export async function generateStoryFile(opts: {
   componentPath: string;
@@ -8,6 +9,10 @@ export async function generateStoryFile(opts: {
   storyTitle: string;
   templatePath: string;
   storiesRoot: string;
+  globalArgs?: string;
+  generateDefault?: boolean;
+  variants?: StoryVariant[];
+  defaultArgs?: string;
 }) {
   const {
     componentPath,
@@ -15,6 +20,10 @@ export async function generateStoryFile(opts: {
     templatePath,
     storyTitle,
     storiesRoot,
+    globalArgs,
+    variants,
+    generateDefault,
+    defaultArgs,
   } = opts;
 
   const componentFilename = path.basename(componentPath);
@@ -56,6 +65,10 @@ export async function generateStoryFile(opts: {
     componentFilename,
     storyTitle,
     relativeImportPath,
+    globalArgs,
+    generateDefault,
+    variants,
+    defaultArgs,
   });
 
   await fs.ensureDir(path.dirname(storyOutputPath));

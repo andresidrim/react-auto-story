@@ -2,11 +2,17 @@ import { Project, CommentRange } from "ts-morph";
 import { getAllTSXFiles } from "./scanner";
 import { getStoryTitleFromPath } from "./utils/pathHelpers";
 import { inferNameFromDefaultExport } from "./utils/componentName";
+import { parseCommentFlags } from "./utils/getArgs";
+import { StoryVariant } from "./common/types/storyVariant";
 
 type StoryComponentInfo = {
   componentName: string;
   componentPath: string;
   storyTitle: string;
+  globalArgs?: string;
+  generateDefault?: boolean;
+  variants?: StoryVariant[];
+  defaultArgs?: string;
 };
 
 export async function findStorybookComponents(
@@ -30,6 +36,12 @@ export async function findStorybookComponents(
           comment.getText().includes("@auto-story"),
         );
 
+        const fullComment = leadingComments
+          .map((comment) => comment.getText())
+          .join("\n");
+        const { globalArgs, variants, generateDefault, defaultArgs } =
+          parseCommentFlags(fullComment);
+
         const componentName =
           exportName === "default"
             ? inferNameFromDefaultExport(declaration) || "DefaultComponent"
@@ -40,6 +52,10 @@ export async function findStorybookComponents(
             componentName,
             componentPath: fullPath,
             storyTitle: getStoryTitleFromPath(fullPath, root),
+            globalArgs,
+            variants,
+            generateDefault,
+            defaultArgs,
           });
         }
       }

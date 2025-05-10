@@ -13,10 +13,13 @@ Useful for teams who want to streamline Storybook integration with minimal manua
 - Works with both named and default exports
 - Outputs stories to a structured `src/stories/` folder
 - Smart import paths and customizable title generation
+- Supports global args, variants, and flag-based customization
 
 ---
 
 ## 📦 Installation
+
+Install globally:
 
 ```bash
 npm install -g react-auto-story
@@ -26,6 +29,12 @@ or with PNPM:
 
 ```bash
 pnpm add -g react-auto-story
+```
+
+Alternatively, you can use it directly with `npx` (no install required):
+
+```bash
+npx react-auto-story
 ```
 
 ---
@@ -60,9 +69,21 @@ export function Button() {
 Or:
 
 ```tsx
-// @auto-story
-export default function Input() {
-  return <input />;
+/*
+@auto-story
+--global-args: {
+  children: "Click me"
+}
+--Default-args: {
+  variant: "primary"
+}
+--variant Secondary
+--Secondary-args: {
+  variant: "secondary"
+}
+*/
+export default function Button() {
+  return <button />;
 }
 ```
 
@@ -81,6 +102,22 @@ For example:
 ```
 src/components/atoms/Button.tsx → src/stories/atoms/Button.stories.tsx
 ```
+
+---
+
+## 🏷 Supported Flags
+
+Inside the `@auto-story` comment, you can use the following flags:
+
+| Flag               | Description                                 |
+| ------------------ | ------------------------------------------- |
+| `--global-args`    | Sets the `args` on the default export       |
+| `--Default-args`   | Sets the `args` for the `Default` story     |
+| `--variant [Name]` | Declares a named story variant              |
+| `--[Name]-args`    | Provides `args` for the named variant       |
+| `--no-default`     | Skips the generation of the `Default` story |
+
+All args must be in valid JavaScript object format (`{ key: "value" }`).
 
 ---
 
