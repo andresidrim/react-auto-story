@@ -1,0 +1,40 @@
+{
+  "name": "@andresidrim/react-auto-story",
+  "version": "1.0.0",
+  "description": "CLI tool to automatically generate Storybook .stories.tsx files from annotated React components.",
+  "main": "index.js",
+  "bin": {
+    "auto-story": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "storybook",
+    "cli",
+    "react",
+    "typescript",
+    "automation",
+    "codegen",
+    "stories",
+    "component",
+    "ejs"
+  ],
+  "author": "André Corrêa Sidrim <andrecorreasidrim@gmail.com> (https://github.com/andresidrim)",
+  "license": "MIT",
+  "packageManager": "pnpm@10.10.0",
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.8",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "ejs": "^3.1.10",
+    "fs-extra": "^11.3.0",
+    "inquirer": "^12.6.0",
+    "ts-morph": "^25.0.1"
+  }
+}

@@ -1,0 +1,32 @@
+# Build output
+dist/
+
+# Dependencies
+node_modules/
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# TypeScript cache and IDE settings
+*.tsbuildinfo
+.vscode/
+.idea/
+
+# Temporary files
+*.log
+*.tmp
+*.swp
+*.DS_Store
+
+# Local package tarballs
+*.tgz
+
+# Storybook output (if used for testing CLI)
+.storybook-out/
+
+# OS-specific settings
+Thumbs.db
+
