@@ -22,19 +22,13 @@ Useful for teams who want to streamline Storybook integration with minimal manua
 Install globally:
 
 ```bash
-npm install -g react-auto-story
-```
-
-or with PNPM:
-
-```bash
-pnpm add -g react-auto-story
+npm install -g @andresidrim/react-auto-story
 ```
 
 Alternatively, you can use it directly with `npx` (no install required):
 
 ```bash
-npx react-auto-story
+npx @andresidrim/react-auto-story
 ```
 
 ---
@@ -45,6 +39,12 @@ From your project root, simply run:
 
 ```bash
 react-auto-story
+```
+
+Or with:
+
+```bash
+npx @andresidrim/react-auto-story
 ```
 
 Then follow the interactive prompts to:
@@ -82,8 +82,19 @@ Or:
   variant: "secondary"
 }
 */
-export default function Button() {
-  return <button />;
+export default function Button({
+  children,
+}: {
+  children: string;
+  variant: "primary" | "secondary";
+}) {
+  return (
+    <button
+      className={`${variant === "primary" ? "bg-red-500" : "bg-blue-500"}`}
+    >
+      {children}
+    </button>
+  );
 }
 ```
 
